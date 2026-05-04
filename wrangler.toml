@@ -31,7 +31,9 @@ binding = "AI"
 [observability]
 enabled = true
 
-# CPU limit keeps the worker free-tier-friendly. 30 s is enough for the
-# longest realistic dictation (Whisper at 30 s of audio decodes in ~3 s).
-[limits]
-cpu_ms = 30000
+# No `[limits]` section: setting `cpu_ms` requires a paid Workers plan
+# (deploy fails with code 100328 on the free tier). Speaaak is designed
+# to fit under the free plan (~10k neurons/day), and the heavy work
+# (Whisper + Llama inference) runs on Cloudflare's AI infra, not the
+# Worker's CPU — so the default 10 ms CPU limit is plenty for the
+# orchestration this script does.
