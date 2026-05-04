@@ -113,6 +113,24 @@ Keeping the worker outside the main Speaaak repo lets:
 - Contributors fork just the worker without cloning the macOS app.
 - The worker have its own release cadence (model fallbacks change, the macOS app does not need an update).
 
+## FAQ
+
+### Why does the Deploy button always create a copy in MY GitHub?
+
+That's how Cloudflare's Deploy button works — and it's the right design. CF clones this source repo into **your** GitHub account so **you** own the worker source. The maintainers of Speaaak can never push code to your worker, change its endpoints, or read your token. CF wires up a GitHub Action in your fork that re-deploys whenever you push to `main`.
+
+To pull in upstream changes (model fallbacks, fixes), use GitHub's "Sync fork" button on your fork, or add this repo as an `upstream` remote and `git pull --rebase upstream main` when a new release ships.
+
+### Can my fork (the deployed copy) be private?
+
+Yes. After deploy, go to your GitHub fork → Settings → "Change visibility" → Private. The CF→GitHub Action installed at deploy time uses an OAuth token tied to your account, so it keeps redeploying on push to a private repo just fine.
+
+The only repo that has to stay public is **this one** (`bylaaabs/speaaak-cf-worker`) — the Deploy button needs to be able to read it to clone for the next visitor.
+
+### Can I run my own modified worker.js?
+
+Absolutely. After you've forked / deployed, edit `src/worker.js` in your account, push, and the CF Action redeploys. Common reasons to fork: adding rate limits, swapping in a different transcription model, putting the worker behind a custom domain, adding HTTP signature checks on top of the Bearer token.
+
 ## Contributing
 
 PRs welcome. Especially appreciated:
