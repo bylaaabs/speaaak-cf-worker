@@ -1,0 +1,9 @@
+# Copy to `.dev.vars` for local development with `wrangler dev`.
+# In production, this is a Worker secret — set with:
+#   wrangler secret put SPEAAAK_TOKEN
+#
+# The Speaaak macOS app sends every request with
+#   Authorization: Bearer <SPEAAAK_TOKEN>
+# and the worker rejects anything else with 401.
+
+SPEAAAK_TOKEN=replace-me-with-something-from-openssl-rand-base64-32

@@ -1,0 +1,37 @@
+# Cloudflare Worker config for Speaaak's self-hosted backend.
+#
+# This worker exposes two OpenAI-compatible endpoints
+# (`/audio/transcriptions` and `/chat/completions`) plus a `/health`
+# probe, all backed by Cloudflare Workers AI. Authentication is a
+# Bearer token (`SPEAAAK_TOKEN`) the user configures at deploy time.
+#
+# Deploying via the "Deploy to Cloudflare" button on this repo's
+# README.md will:
+#   1. Fork the worker into the user's account.
+#   2. Read this file for compatibility / bindings.
+#   3. Prompt for the `SPEAAAK_TOKEN` secret.
+#   4. Spin it up and return the user's worker URL.
+#
+# To deploy locally for development:
+#   wrangler login
+#   echo "<your-token>" | wrangler secret put SPEAAAK_TOKEN
+#   wrangler deploy
+
+name = "speaaak"
+main = "src/worker.js"
+compatibility_date = "2025-04-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Workers AI binding — gives the worker access to CF's hosted models
+# (Whisper for transcription, Llama for cleanup) without external API keys.
+[ai]
+binding = "AI"
+
+# Observability lets the user see invocation logs in the CF dashboard.
+[observability]
+enabled = true
+
+# CPU limit keeps the worker free-tier-friendly. 30 s is enough for the
+# longest realistic dictation (Whisper at 30 s of audio decodes in ~3 s).
+[limits]
+cpu_ms = 30000

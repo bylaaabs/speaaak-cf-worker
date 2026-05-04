@@ -1,0 +1,20 @@
+{
+  "name": "speaaak-cf-worker",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker backing Speaaak's self-hosted tier — runs Whisper + Llama on the user's own free CF account.",
+  "private": true,
+  "main": "src/worker.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/bylaaabs/speaaak-cf-worker",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bylaaabs/speaaak-cf-worker.git"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}
