@@ -1,0 +1,15 @@
+# checks that service.yaml agrees with infra/map/services.yaml.
+name: service check
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    uses: bylaaabs/.github/.github/workflows/service-check.yml@main
+    secrets: inherit

@@ -1,0 +1,10 @@
+# service.yaml - what this repo is. must agree with infra/map/services.yaml; ci runs
+# `node infra/scripts/check.mjs service.yaml`. schema and examples: infra/schema/service.yaml.
+name: speaaak-cf-worker
+hostname: null
+kind: service
+language: typescript
+build: none - wrangler deploys src/worker.js as is
+deploy: npx wrangler deploy, by each user on their own cloudflare account
+runs_on: cloudflare-workers
+owner: product
