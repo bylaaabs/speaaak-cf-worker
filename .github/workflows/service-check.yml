@@ -1,4 +1,4 @@
-# checks that service.yaml agrees with infra/map/services.yaml.
+# checks that service.yaml agrees with map/map/services.yaml.
 name: service check
 
 on:
