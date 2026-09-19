@@ -1,5 +1,5 @@
-# service.yaml - what this repo is. must agree with infra/map/services.yaml; ci runs
-# `node infra/scripts/check.mjs service.yaml`. schema and examples: infra/schema/service.yaml.
+# service.yaml - what this repo is. must agree with map/map/services.yaml; ci runs
+# `node map/scripts/check.mjs service.yaml`. schema and examples: map/schema/service.yaml.
 name: speaaak-cf-worker
 hostname: null
 kind: service
