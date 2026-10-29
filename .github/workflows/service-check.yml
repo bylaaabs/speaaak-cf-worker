@@ -13,3 +13,6 @@ jobs:
   check:
     uses: bylaaabs/.github/.github/workflows/service-check.yml@main
     secrets: inherit
+    # a public repo: never on our own runners (the default, aaanvil-linux).
+    with:
+      runner: ubuntu-latest
